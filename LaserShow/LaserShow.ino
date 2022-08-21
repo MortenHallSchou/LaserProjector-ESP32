@@ -7,8 +7,8 @@
 #include "Objects.h"
 #include "Logo.h"
 
-// Create laser instance (with laser pointer connected to digital pin 5)
-Laser laser(5);
+// Create laser instance (with laser pointer connected to digital pin 8)
+Laser laser(8);
 
 void setup()
 {  
