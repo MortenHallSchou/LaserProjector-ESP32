@@ -39,7 +39,7 @@
 //
 // Params
 //
-#define MCP4X_PORT_WRITE 1
+#define MCP4X_PORT_WRITE 0 // Changed from 1 as ESP32 is faster and direct PORT writes is not needed
 #define MCP4X_NO_LDAC			-1
 #ifndef MCP4X_PORT_WRITE
 #define MCP4X_PORT_WRITE		0
