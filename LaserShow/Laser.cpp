@@ -39,7 +39,7 @@ Laser::Laser(int laserPin)
 void Laser::init()
 {
   dac.init(MCP4X_4822, 5000, 5000,
-      10, 7, 1);
+      9, 7, 1);
   dac.setGain2x(MCP4X_CHAN_A, 0);
   dac.setGain2x(MCP4X_CHAN_B, 0);
   dac.begin(1);
