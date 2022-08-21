@@ -175,9 +175,10 @@ void MCP4X::output(byte chan, unsigned short data) {
 
 void MCP4X::write(unsigned int data) {
 	// Drive chip select low
-	if (MCP4X_PORT_WRITE)
-		PORTB &= 0xfb; // Clear PORTB pin 2 = arduino pin 10
-	else
+	// if (MCP4X_PORT_WRITE)
+	// PORTB &= 0xfb; // Clear PORTB pin 2 = arduino pin 10 
+	// Not necessarry to use direct port manipulation on faster CPU
+	// else
 		digitalWrite(ss_pin, LOW);
 
 	// Send the command and data bits
@@ -185,9 +186,10 @@ void MCP4X::write(unsigned int data) {
 	SPI.transfer(data & 0xff);
 
 	// Return chip select to high
-	if (MCP4X_PORT_WRITE)
-		PORTB |= (1 << 2); // set PORTB pin 2 = arduino pin 10
-	else
+	// if (MCP4X_PORT_WRITE)
+	// Not necessarry to use direct port manipulation on faster CPU
+		// PORTB |= (1 << 2); // set PORTB pin 2 = arduino pin 10
+	// else
 		digitalWrite(ss_pin, HIGH);
 }
 
@@ -211,17 +213,17 @@ void MCP4X::latch(void) {
 
 	// We then need to hold LDAC low for at least 100 ns, i.e ~2 clock cycles.
 
-	if (MCP4X_PORT_WRITE) {
+	// if (MCP4X_PORT_WRITE) {
 		// This gives ~180 ns (three clock cycles, most of which is spent low) of
 		// low time on a Uno R3 (16 MHz), measured on a scope to make sure
-		PORTD &= ~(1 << 7); // Uno: digital pin 7; Mega: digital pin 38
-		asm volatile("nop");
-		PORTD |= (1 << 7);
-	} else {
+	//	PORTD &= ~(1 << 7); // Uno: digital pin 7; Mega: digital pin 38
+	//	asm volatile("nop");
+	//	PORTD |= (1 << 7);
+	//} else {
 		// This takes far, FAR longer than the above despite no NOP; digitalWrite
 		// is SLOW! For comparison: the above takes 180 ns, this takes... 3.8 us,
 		// or 3800 ns, 21 times as long - WITHOUT having a delay in there!
 		digitalWrite(LDAC_pin, LOW);
 		digitalWrite(LDAC_pin, HIGH);
-	}
+	//}
 }
