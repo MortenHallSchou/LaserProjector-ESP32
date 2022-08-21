@@ -11,7 +11,8 @@
 // defines the granularity of the line interpolation. 64 means that each line is split into steps of 64 pixels in the longer direction.
 // setting smaller values will slow down the rendering but will cause more linearity in the galvo movement,
 // setting bigger values will cause faster rendering, but lines will not be straight anymore.
-#define LASER_QUALITY 64
+//#define LASER_QUALITY 64 // Good value for Arduino
+#define LASER_QUALITY 16 // Lower value for ESP32
 
 // Defines how long the galvos wait for the on/off toggling of the laser pointer (in microseconds), this will depend on your laser pointer.
 #define LASER_TOGGLE_DELAY 500
